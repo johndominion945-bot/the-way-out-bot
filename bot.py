@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 
 
@@ -27,25 +28,43 @@ def send_message(text):
     print("Message sent successfully.")
 
 
-message = """☀️ <b>THE WAY OUT</b>
+def load_day():
+    with open("content/day01.json", "r", encoding="utf-8") as file:
+        return json.load(file)
 
-Welcome to your 30-Day Christian Morning Journey.
 
-This is more than a book.
+day = load_day()
 
-For the next 30 days, we're going to build your:
+message = f"""☀️ <b>THE WAY OUT — DAY {day["day"]}</b>
 
-🧠 MIND
-🏃 BODY
-✝️ SPIRIT
+<b>{day["title"]}</b>
 
-<b>DAY 1 is coming.</b>
+📖 <b>Scripture</b>
+{day["scripture"]}
 
-Prepare your heart.
-Prepare your mind.
-Turn toward God.
+{day["devotional"]}
 
-— FAITH & FITNESS HOME
+🧠 <b>MIND CHECK</b>
+{day["mind_check"]}
+
+🏃 <b>BODY MOVE</b>
+{day["body_move"]}
+
+✝️ <b>SPIRIT MOVE</b>
+{day["spirit_move"]}
+
+🚪 <b>YOUR WAY OUT</b>
+{day["way_out"]}
+
+🙏 <b>PRAYER</b>
+{day["prayer"]}
+
+🔥 <b>TODAY'S ACTION</b>
+{day["action"]}
+
+—
+<b>FAITH & FITNESS HOME</b>
+TRAIN YOUR BODY. STRENGTHEN YOUR MIND. GLORIFY GOD.
 """
 
 send_message(message)
