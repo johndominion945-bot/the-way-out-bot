@@ -1,6 +1,7 @@
 import os
 import json
-from datetime import date
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 import requests
 
 
@@ -44,7 +45,10 @@ def load_day(day_number):
 journey = load_journey()
 
 start_date = date.fromisoformat(journey["start_date"])
-today = date.today()
+
+today = datetime.now(
+    ZoneInfo("Africa/Lagos")
+).date()
 
 day_number = (today - start_date).days + 1
 
@@ -64,34 +68,4 @@ day = load_day(day_number)
 
 message = f"""☀️ <b>THE WAY OUT — DAY {day["day"]}</b>
 
-<b>{day["title"]}</b>
-
-📖 <b>Scripture</b>
-{day["scripture"]}
-
-{day["devotional"]}
-
-🧠 <b>MIND CHECK</b>
-{day["mind_check"]}
-
-🏃 <b>BODY MOVE</b>
-{day["body_move"]}
-
-✝️ <b>SPIRIT MOVE</b>
-{day["spirit_move"]}
-
-🚪 <b>YOUR WAY OUT</b>
-{day["way_out"]}
-
-🙏 <b>PRAYER</b>
-{day["prayer"]}
-
-🔥 <b>TODAY'S ACTION</b>
-{day["action"]}
-
-—
-<b>FAITH & FITNESS HOME</b>
-TRAIN YOUR BODY. STRENGTHEN YOUR MIND. GLORIFY GOD.
-"""
-
-send_message(message)
+<b>{day["title"]}</
